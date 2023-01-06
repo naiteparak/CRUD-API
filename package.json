@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Simple CRUD API with vanilla node",
   "main": "app.ts",
-  "type": "module",
+  "type": "commonjs",
   "scripts": {
     "start:dev": "nodemon --watch './**/*.ts' --exec ts-node app.ts",
     "start:prod": "",
