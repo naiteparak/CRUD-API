@@ -1,4 +1,4 @@
-import { User } from './usersInterface'
+import { User } from '../interfaces/usersInterface'
 
 export const users: Array<User> = [
     {
