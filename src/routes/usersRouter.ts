@@ -3,6 +3,7 @@ import {usersController} from "../controllers/usersController";
 import {HttpStatuses} from "../responses/httpStatuses";
 import {responseObj} from "../interfaces/responseObj";
 import {ErrorMessages} from "../responses/errorMessages";
+import {getReqData} from "../utils/getReqData";
 
 const usersRouter = async function (req, res) {
     const queryObject = url.parse(req.url, true)
@@ -19,20 +20,20 @@ const usersRouter = async function (req, res) {
         res.writeHead(HttpStatuses.OK, {"Content-Type": "application/json"});
         res.end(JSON.stringify(data));
     } else if (reqUrl === "/api/users" && reqMethod === "POST" && reqQuery === undefined) {
-        const data = await usersController.createUser()
-        res.writeHead(HttpStatuses.OK, {"Content-Type": "application/json"});
+        const data = await usersController.createUser(await getReqData(req))
+        res.writeHead(HttpStatuses.CREATED_SUCCESSFULLY, {"Content-Type": "application/json"});
         res.end(JSON.stringify(data));
     } else if (reqUrl === "/api/users" && reqMethod === "PUT" && reqQuery === "userId") {
-        const data = await usersController.updateUser(userId)
+        const data = await usersController.updateUser(await getReqData(req), userId)
         res.writeHead(HttpStatuses.OK, {"Content-Type": "application/json"});
         res.end(JSON.stringify(data));
     } else if (reqUrl === "/api/users" && reqMethod === "DELETE" && reqQuery === "userId") {
         const data = await usersController.deleteUser(userId)
-        res.writeHead(HttpStatuses.OK, {"Content-Type": "application/json"});
+        res.writeHead(HttpStatuses.NO_CONTENT, {"Content-Type": "application/json"});
         res.end(JSON.stringify(data));
     } else {
         res.writeHead(HttpStatuses.NOT_FOUND, {"Content-Type": "application/json"});
-        const err: responseObj =  {
+        const err: responseObj = {
             res: null,
             error: ErrorMessages.REQUESTED_RESOURCE_WAS_NOT_FOUND,
             status: HttpStatuses.NOT_FOUND

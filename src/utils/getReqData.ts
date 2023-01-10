@@ -1,3 +1,5 @@
+import {ErrorMessages} from "../responses/errorMessages";
+
 export const getReqData = function(req){
     return new Promise((resolve, reject) => {
         try {
@@ -6,10 +8,10 @@ export const getReqData = function(req){
                 body += chunk.toString();
             });
             req.on("end", () => {
-                resolve(body);
+                resolve(JSON.parse(body));
             });
         } catch (error) {
-            reject(error);
+            reject(ErrorMessages.SOMETHING_WENT_WRONG);
         }
     });
 }

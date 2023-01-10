@@ -15,7 +15,7 @@ class UsersController {
             this.res = {
                 res: null,
                 error: ErrorMessages.SOMETHING_WENT_WRONG,
-                status: HttpStatuses.BAD_REQUEST
+                status: HttpStatuses.INTERNAL_ERROR
             }
             return this.res
         }
@@ -30,37 +30,37 @@ class UsersController {
             this.res = {
                 res: null,
                 error: ErrorMessages.SOMETHING_WENT_WRONG,
-                status: HttpStatuses.BAD_REQUEST
+                status: HttpStatuses.INTERNAL_ERROR
             }
             return this.res
         }
 
     }
 
-    async createUser() {
+    async createUser(body) {
         try {
-            const data = await userService.createUser()
+            const data = await userService.createUser(body)
             return data
         } catch {
             this.res = {
                 res: null,
                 error: ErrorMessages.SOMETHING_WENT_WRONG,
-                status: HttpStatuses.BAD_REQUEST
+                status: HttpStatuses.INTERNAL_ERROR
             }
             return this.res
         }
 
     }
 
-    async updateUser(userId) {
+    async updateUser(body, userId) {
         try {
-            const data = await userService.updateUser(userId)
+            const data = await userService.updateUser(body, userId)
             return data
         } catch {
             this.res = {
                 res: null,
                 error: ErrorMessages.SOMETHING_WENT_WRONG,
-                status: HttpStatuses.BAD_REQUEST
+                status: HttpStatuses.INTERNAL_ERROR
             }
             return this.res
         }
@@ -75,7 +75,7 @@ class UsersController {
             this.res = {
                 res: null,
                 error: ErrorMessages.SOMETHING_WENT_WRONG,
-                status: HttpStatuses.BAD_REQUEST
+                status: HttpStatuses.INTERNAL_ERROR
             }
             return this.res
         }
