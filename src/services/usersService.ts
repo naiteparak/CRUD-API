@@ -11,14 +11,6 @@ class UserService {
 
     async getAllUsers() {
         try {
-            if (!users || users.length < 1) {
-                this.res = {
-                    res: null,
-                    error: ErrorMessages.USERS_NOT_FOUND,
-                    status: HttpStatuses.NOT_FOUND
-                }
-                return this.res
-            }
             this.res = {
                 res: users,
                 error: null,
