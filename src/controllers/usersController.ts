@@ -11,7 +11,7 @@ class UsersController {
         try {
             const data = await userService.getAllUsers()
             return data
-        } catch {
+        } catch (error) {
             this.res = {
                 res: null,
                 error: ErrorMessages.SOMETHING_WENT_WRONG,
@@ -26,7 +26,7 @@ class UsersController {
         try {
             const data = await userService.getUserById(userId)
             return data
-        } catch {
+        } catch (error) {
             this.res = {
                 res: null,
                 error: ErrorMessages.SOMETHING_WENT_WRONG,
@@ -41,7 +41,7 @@ class UsersController {
         try {
             const data = await userService.createUser(body)
             return data
-        } catch {
+        } catch (error) {
             this.res = {
                 res: null,
                 error: ErrorMessages.SOMETHING_WENT_WRONG,
@@ -56,7 +56,7 @@ class UsersController {
         try {
             const data = await userService.updateUser(body, userId)
             return data
-        } catch {
+        } catch (error){
             this.res = {
                 res: null,
                 error: ErrorMessages.SOMETHING_WENT_WRONG,
@@ -71,7 +71,7 @@ class UsersController {
         try {
             const data = await userService.deleteUser(userId)
             return data
-        } catch {
+        } catch (error){
             this.res = {
                 res: null,
                 error: ErrorMessages.SOMETHING_WENT_WRONG,

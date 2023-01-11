@@ -20,11 +20,11 @@ const usersRouter = async function (req, res) {
         res.writeHead(HttpStatuses.OK, {"Content-Type": "application/json"});
         res.end(JSON.stringify(data));
     } else if (reqUrl === "/api/users" && reqMethod === "POST" && reqQuery === undefined) {
-        const data = await usersController.createUser(await getReqData(req))
+        const data = await usersController.createUser(await getReqData(req, res))
         res.writeHead(HttpStatuses.CREATED_SUCCESSFULLY, {"Content-Type": "application/json"});
         res.end(JSON.stringify(data));
     } else if (reqUrl === "/api/users" && reqMethod === "PUT" && reqQuery === "userId") {
-        const data = await usersController.updateUser(await getReqData(req), userId)
+        const data = await usersController.updateUser(await getReqData(req, res), userId)
         res.writeHead(HttpStatuses.OK, {"Content-Type": "application/json"});
         res.end(JSON.stringify(data));
     } else if (reqUrl === "/api/users" && reqMethod === "DELETE" && reqQuery === "userId") {

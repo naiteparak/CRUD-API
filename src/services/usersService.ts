@@ -17,7 +17,7 @@ class UserService {
                 status: HttpStatuses.OK
             }
             return this.res
-        } catch {
+        } catch (error){
             this.res = {
                 res: null,
                 error: ErrorMessages.SOMETHING_WENT_WRONG,
@@ -52,7 +52,7 @@ class UserService {
                 status: HttpStatuses.OK
             }
             return this.res
-        } catch {
+        } catch (error){
             this.res = {
                 res: null,
                 error: ErrorMessages.SOMETHING_WENT_WRONG,
@@ -95,7 +95,7 @@ class UserService {
                 status: HttpStatuses.CREATED_SUCCESSFULLY
             }
             return this.res
-        } catch {
+        } catch (error){
             this.res = {
                 res: null,
                 error: ErrorMessages.SOMETHING_WENT_WRONG,
@@ -146,7 +146,7 @@ class UserService {
             }
             return this.res
 
-        } catch {
+        } catch (error){
             this.res = {
                 res: null,
                 error: ErrorMessages.SOMETHING_WENT_WRONG,
@@ -183,7 +183,7 @@ class UserService {
                 status: HttpStatuses.NO_CONTENT
             }
             return this.res
-        } catch {
+        } catch (error){
             this.res = {
                 res: null,
                 error: ErrorMessages.SOMETHING_WENT_WRONG,
