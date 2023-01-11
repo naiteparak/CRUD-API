@@ -1,6 +1,8 @@
 import {ErrorMessages} from "../responses/errorMessages";
+import {responseObj} from "../interfaces/responseObj";
+import {HttpStatuses} from "../responses/httpStatuses";
 
-export const getReqData = function(req){
+export const getReqData = function (req) {
     return new Promise((resolve, reject) => {
         try {
             let body = "";
@@ -11,7 +13,12 @@ export const getReqData = function(req){
                 resolve(JSON.parse(body));
             });
         } catch (error) {
-            reject(ErrorMessages.SOMETHING_WENT_WRONG);
+            const res: responseObj = {
+                res: null,
+                error: ErrorMessages.SOMETHING_WENT_WRONG,
+                status: HttpStatuses.INTERNAL_ERROR
+            }
+            return res
         }
     });
 }
