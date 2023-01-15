@@ -6,7 +6,7 @@
   "scripts": {
     "start:dev": "nodemon --watch './**/*.ts' --exec ts-node app.ts",
     "start:prod": "webpack && nodemon ./dist/bundle.js",
-    "start:multi": "...",
+    "start:multi": "npm run start:dev -- --multi",
     "test": "jest"
   },
   "repository": {
