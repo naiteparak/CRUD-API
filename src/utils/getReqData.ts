@@ -10,19 +10,13 @@ export const getReqData = function (req, res) {
                 .on("data", (chunk) => {
                     body += chunk.toString();
                 })
-                .on("end", () => {
-                    try {
-                        resolve(JSON.parse(body));
-                    } catch (error) {
-                        res.writeHead(HttpStatuses.BAD_REQUEST, {"Content-Type": "application/json"});
-                        const err: responseObj = {
-                            res: null,
-                            error: ErrorMessages.BAD_REQUEST,
-                            status: HttpStatuses.BAD_REQUEST
-                        }
-                        res.end(JSON.stringify(err));
-                    }
-                })
+                .on('end', () => {
+                if (body.length) {
+                    resolve(JSON.parse(body))
+                } else {
+                    resolve(null)
+                }
+            })
         } catch (error) {
             res.writeHead(HttpStatuses.BAD_REQUEST, {"Content-Type": "application/json"});
             const err: responseObj = {

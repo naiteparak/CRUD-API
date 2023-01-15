@@ -1,9 +1,9 @@
-import {users} from "../users/users";
 import {responseObj} from "../interfaces/responseObj";
 import {ErrorMessages} from "../responses/errorMessages";
 import {HttpStatuses} from "../responses/httpStatuses";
-import {User} from "../interfaces/usersInterface";
 import {v4 as uuidv4, validate} from 'uuid';
+import {User} from "../interfaces/userInterface";
+import {db} from "../utils/db";
 
 class UserService {
 
@@ -12,12 +12,12 @@ class UserService {
     async getAllUsers() {
         try {
             this.res = {
-                res: users,
+                res: await db.read(),
                 error: null,
                 status: HttpStatuses.OK
             }
             return this.res
-        } catch (error){
+        } catch (error) {
             this.res = {
                 res: null,
                 error: ErrorMessages.SOMETHING_WENT_WRONG,
@@ -37,6 +37,7 @@ class UserService {
                 }
                 return this.res
             }
+            const users = await db.read()
             const user = users.find((user) => user.id === userId);
             if (!user) {
                 this.res = {
@@ -52,7 +53,7 @@ class UserService {
                 status: HttpStatuses.OK
             }
             return this.res
-        } catch (error){
+        } catch (error) {
             this.res = {
                 res: null,
                 error: ErrorMessages.SOMETHING_WENT_WRONG,
@@ -88,14 +89,16 @@ class UserService {
                 age: reqBody.age,
                 hobbies: reqBody.hobbies
             }
+            let users = await db.read()
             users.push(user)
+            await db.write(users)
             this.res = {
                 res: user,
                 error: null,
                 status: HttpStatuses.CREATED_SUCCESSFULLY
             }
             return this.res
-        } catch (error){
+        } catch (error) {
             this.res = {
                 res: null,
                 error: ErrorMessages.SOMETHING_WENT_WRONG,
@@ -124,6 +127,7 @@ class UserService {
                 }
                 return this.res
             }
+            let users = await db.read()
             const userIndex = users.findIndex((user) => user.id === userId);
             if (userIndex === -1) {
                 this.res = {
@@ -139,6 +143,7 @@ class UserService {
                 age: reqBody.age,
                 hobbies: reqBody.hobbies
             }
+            await db.write(users)
             this.res = {
                 res: users[userIndex],
                 error: null,
@@ -146,7 +151,7 @@ class UserService {
             }
             return this.res
 
-        } catch (error){
+        } catch (error) {
             this.res = {
                 res: null,
                 error: ErrorMessages.SOMETHING_WENT_WRONG,
@@ -167,6 +172,7 @@ class UserService {
                 }
                 return this.res
             }
+            let users = await db.read()
             const userIndex = users.findIndex((user) => user.id === userId);
             if (userIndex === -1) {
                 this.res = {
@@ -177,13 +183,14 @@ class UserService {
                 return this.res
             }
             users.splice(userIndex, 1)
+            await db.write(users)
             this.res = {
                 res: `User with id ${userId} deleted successfully`,
                 error: null,
                 status: HttpStatuses.NO_CONTENT
             }
             return this.res
-        } catch (error){
+        } catch (error) {
             this.res = {
                 res: null,
                 error: ErrorMessages.SOMETHING_WENT_WRONG,
