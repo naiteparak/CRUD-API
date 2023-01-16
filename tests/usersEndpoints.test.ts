@@ -45,7 +45,7 @@ describe("Users endpoints:", () => {
         const result = {
             res: `User with id uuid deleted successfully`,
             error: null,
-            status: HttpStatuses.OK
+            status: HttpStatuses.NO_CONTENT
         }
         expect(await userService.deleteUser("uuid")).toEqual(result)
     });

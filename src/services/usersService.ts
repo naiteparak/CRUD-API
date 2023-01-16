@@ -187,7 +187,7 @@ class UserService {
             this.res = {
                 res: `User with id ${userId} deleted successfully`,
                 error: null,
-                status: HttpStatuses.OK
+                status: HttpStatuses.NO_CONTENT
             }
             return this.res
         } catch (error) {
