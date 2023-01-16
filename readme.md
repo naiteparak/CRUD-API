@@ -3,12 +3,15 @@
 Simple Crud API by using vanilla node.js 
 
 # Installation 
+ 
+First of all you need to install all packages with command:
 
-In first of all you need to install all packages with command:
-
-```
+```bash
 npm install
 ```
+
+After installing all packages you need to create .env file from the .env.example file 
+
 
 # Running 
 
@@ -20,19 +23,19 @@ App have a few methods of running
 
 For running app in **Development** mode you need to run this command:
 
-```
+```bash
 npm run start:dev
 ```
 
 For running app in **Production** mode you need to run this command:
 
-```
+```bash
 npm run start:prod
 ```
 
 For running app in **Multiple** mode you need to run this command:
 
-```
+```bash
 npm run start:multi
 ```
 
